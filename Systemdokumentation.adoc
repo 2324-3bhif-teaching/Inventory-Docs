@@ -1,0 +1,130 @@
+= Systemdokumentation: Inventarisierungssoftware für Hardware-Komponenten der Roboterstation
+
+== 1. Einleitung
+Diese Systemdokumentation beschreibt die technischen Details, Architektur und Funktionsweise der Inventarisierungssoftware für
+die Hardware-Komponenten der Roboterstation, die im Auftrag der HTL Leonding entwickelt wurde.
+
+== 2. Systemübersicht
+Die Inventarisierungssoftware dient zur Verwaltung und Erfassung von Hardware-Komponenten für die Roboterstation des Tages der offenen Türe der HTL Leonding.
+Sie ermöglicht die Überprüfung des Zustands, das Hinzufügen, Entfernen und Aktualisieren sowie das Hinzufügen von Bildern für jedes Gerät.
+Zudem werden QR-Codes für die Komponenten generiert.
+
+== 3. Systemarchitektur
+
+=== 3.1 Übersicht
+Die Systemarchitektur besteht aus mehreren Schichten:
+- *Präsentationsschicht*: Benutzeroberfläche für die Interaktion mit dem System.
+- *Logikschicht*: Geschäftslogik für die Verarbeitung der Anforderungen.
+- *Datenschicht*: Verwaltung der Datenbank und der Datenzugriffsschicht.
+
+=== 3.2 Komponenten
+- *Benutzeroberfläche (UI)*: Entwickelt mit HTML, CSS und Typescript für eine intuitive und benutzerfreundliche Bedienung.
+- *Backend-Server*: Implementiert mit Node.js und Express.js zur Verarbeitung von Anfragen und Kommunikation mit der Datenbank.
+- *Datenbank*: Entwickelt mit SQLite für die Speicherung und Verwaltung der Daten der Hardware-Komponenten.
+
+=== 3.3 Datenfluss
+1. *Benutzerinteraktion*: Der Benutzer kann neue Geräte sowie Kategorien hinzufügen, aktualisieren oder löschen.
+2. *Anfrage an Backend*: Die UI sendet eine Anfrage an den Backend-Server.
+3. *Datenverarbeitung*: Der Backend-Server verarbeitet die Anfrage und interagiert mit der Datenbank.
+4. *Antwort an UI*: Der Backend-Server sendet die Antwort zurück an die UI.
+5. *Anzeige der Ergebnisse*: Die UI zeigt die verarbeiteten Daten dem Benutzer an.
+
+== 4. Funktionale Beschreibung
+
+=== 4.1 Erfassung von Hardware-Komponenten
+- *Funktion*: Erfassung und Speicherung von Hardware-Komponenten und deren Spezifikationen.
+- *Implementierung*: Die eingegeben Daten aus der UI werden an den Backend-Server gesendet, welcher diese in der Datenbank gespeichert.
+
+=== 4.2 Überprüfung des Zustands
+- *Funktion*: Jedes Gerät hat zwei Checkbuttons, welche angeben, ob das Gerät funktionsfähig und verfügbar ist. Zusätzlich kann ein Kommentar hinzugefügt werden, wo der Zustand des Geräts
+    genauer beschrieben werden kann.
+
+- *Implementierung*: Die Checkbuttons und das Kommentarfeld werden in der UI angezeigt und die Daten werden an den Backend-Server gesendet, welcher diese in der Datenbank speichert.
+
+=== 4.4 Verwaltungsfunktionen
+- *Funktion*: Hinzufügen, Entfernen und Aktualisieren von Komponenten.
+- *Implementierung*: CRUD-Operationen (Create, Read, Update, Delete) über die UI und entsprechende Backend-API-Endpunkte.
+
+=== 4.5 QR-Code-Generierung und -Scannen
+- *Funktion*: Generierung und Drucken von QR-Codes für jede Komponente, sowie Scannen zur Anzeige von Informationen.
+- *Implementierung*: Integration von QR-Code-Bibliotheken in die UI, Backend-Logik zur QR-Code-Verarbeitung.
+
+== 5. Nicht-funktionale Anforderungen
+
+=== 5.1 Benutzerfreundlichkeit
+- *Beschreibung*: Intuitive und leicht zu bedienende Benutzeroberfläche.
+- *Maßnahmen*: Benutzerfreundliches Design, konsistente Navigation, ausführliche Hilfetexte.
+
+=== 5.2 Zuverlässigkeit
+- *Beschreibung*: Stabilität und Genauigkeit der Software.
+- *Maßnahmen*: Umfassende Tests, regelmäßige Wartung und Updates.
+
+=== 5.3 Sicherheit
+- *Beschreibung*: Schutz sensibler Daten und Beschränkung des Zugriffs.
+- *Maßnahmen*: Implementierung von Authentifizierungs- und Autorisierungsmechanismen, Verschlüsselung sensibler Daten.
+
+== 6. Datenmodell
+
+=== 6.1 Datenbankstruktur
+- *Tabellen*:
+- *Komponenten*: Speicherung der Hardware-Komponenten-Daten (ID, Name, Spezifikationen, Zustand, Standort).
+- *Standorte*: Informationen über die verschiedenen Standorte innerhalb der Roboterstation.
+- *QR-Codes*: Verknüpfung von QR-Codes mit den entsprechenden Komponenten.
+
+=== 6.2 Beziehungen
+- *Komponenten zu Standorten*: Eine Komponente ist einem bestimmten Standort zugeordnet (1:n-Beziehung).
+- *Komponenten zu QR-Codes*: Jede Komponente hat genau einen QR-Code (1:1-Beziehung).
+
+== 7. Schnittstellen
+
+=== 7.1 Benutzeroberfläche
+- *Beschreibung*: Formulare und Dashboards zur Dateneingabe und -anzeige. Multer für das Hochladen von Bildern.
+- *Technologien*: Typescript, HTML, CSS.
+
+=== 7.2 Backend-API
+- *Beschreibung*: Express zur Kommunikation zwischen UI und Datenbank.
+- *Technologien*: Node.js, Express.js.
+
+=== 7.3 Datenbank
+- *Beschreibung*: SQLIte-Datenbank zur Speicherung aller relevanten Daten.
+- *Technologien*: SQLIte.
+
+== 8. Testanforderungen
+
+=== 8.1 Testfälle
+- *Funktionstests*: Überprüfung der einzelnen Funktionen (Erfassung, Überprüfung, Standortverwaltung, QR-Code-Generierung und -Scannen).
+- *Integrationstests*: Sicherstellung der reibungslosen Interaktion zwischen UI, Backend und Datenbank.
+
+=== 8.2 Testmethoden
+- *Automatisierte Tests*: Github-Actions führen nach jeder Änderung auf dem Main-Branch automatisierte Tests durch.
+
+== 9. Qualitätsanforderungen
+
+=== 9.1 Qualitätssicherung
+- *Beschreibung*: Regelmäßige Überprüfung und Sicherstellung der Softwarequalität.
+- *Maßnahmen*: Code-Reviews, kontinuierliche Integration und Deployment (CI/CD), regelmäßige Tests und Updates.
+
+== 10. Risikomanagement
+
+=== 10.1 Risikobewertung
+- *Beschreibung*: Identifizierung und Bewertung potenzieller Risiken.
+- *Maßnahmen*: Regelmäßige Risikobewertungen und -analysen, Erstellung eines Risikominderungsplans.
+
+=== 10.2 Risikominderung
+- *Beschreibung*: Maßnahmen zur Minimierung der identifizierten Risiken.
+- *Maßnahmen*: Backup-Strategien, Sicherheitsmaßnahmen, Schulung und Weiterbildung der Benutzer.
+
+== 11. Lieferung, Installation und Support
+
+=== 11.1 Lieferung
+- *Beschreibung*: Bereitstellung der Software auf der Leocloud.
+- *Maßnahmen*: Abschluss der Entwicklungs- und Testphase, Bereitstellung der Software auf der Leocloud.
+
+== 12. Dokumentation
+
+=== 12.2 Technische Dokumentation
+- *Beschreibung*: Detaillierte Beschreibung der Softwarearchitektur und -funktionalität.
+- *Inhalt*: Architekturdiagramme, API-Dokumentation, Datenbankstruktur.
+
+
+

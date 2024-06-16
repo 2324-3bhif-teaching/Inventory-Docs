@@ -50,8 +50,6 @@ image::src/main_ansicht.png[Dashboard]
 image::src/karte_ausgeklappt.png[Detaillierte Ansicht]
 image::src/neuesGerät.png[Neues Gerät hinzufügen]
 
-
-
 == Datenmodell
 Es sollte eine Datenbankstruktur definiert werden, um die erfassten Hardware-Komponenten zu speichern.
 Beziehungen zwischen den Komponenten und ihren Standorten sollten klar definiert werden.
@@ -71,9 +69,8 @@ Die Software sollte den branchenüblichen Standards und Best Practices entsprech
 Regelmäßige Risikobewertungen sollten durchgeführt werden, um potenzielle Probleme frühzeitig zu identifizieren und zu bewältigen.
 Ein Plan zur Risikominderung sollte erstellt und implementiert werden.
 
-== Lieferung, Installation und Support
-Die Software sollte rechtzeitig für die Implementierung in der Roboterstation bereitgestellt werden.
-Schulung und Unterstützung für die Benutzer sollten bereitgestellt werden.
+== Verfügbarkeit
+Die Software wird rechtzeitig auf der Leocloud deployed, um den Benutzern zur Verfügung zu stehen.
 
 == Dokumentation
 Benutzerhandbuch:: Ein Handbuch zur Nutzung der Software sollte erstellt werden.
